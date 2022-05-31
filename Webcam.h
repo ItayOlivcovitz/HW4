@@ -14,10 +14,10 @@ class Webcam : public PeripheralDevice
 {
 	string resultion;
 public:
-	Webcam(string resultion);
+	Webcam(const int price, const string& manufacturer, const string& color, const bool isWireless,const string& resultion);
 
-	string getResultion();
-	void setResulution(string resulution);
+	string getResultion() const;
+	void setResulution(const string resulution);
 	
 
 };
