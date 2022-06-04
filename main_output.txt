@@ -1,17 +1,49 @@
+Trying to add a item with an id already in the catalog
 Printing KSF branch in Haifa
 There are 4 item in the catalog
+Catalog value is: 185
 id 1: Dell 70$, Laptop, Intel
 id 2: Apple 100$, Desktop, AMD
 id 3: Pilot 5$, Wireless, Red, Mouse with dpi : 100
 id 4: Casio 10$, Wired, Silver, Keyboard with 26 keys
+
+Printing KSF branch in Haifa
+There are 4 item in the catalog
+Catalog value is: 185
+id 3: Pilot 5$, Wireless, Red, Mouse with dpi : 100
+id 4: Casio 10$, Wired, Silver, Keyboard with 26 keys
+id 1: Dell 70$, Laptop, Intel
+id 2: Apple 100$, Desktop, AMD
+
 Connecting a keyboard
 id 5: Sasio 20$, Wireless, Gold, Keyboard with 24 keys is Connecting to computer: id 7: Maple 120$, Laptop, AMD
 Connecting a mouse
 id 6: Goldline 10$, Wired, White, Mouse with dpi : 1000 is Connecting to computer: id 7: Maple 120$, Laptop, AMD
-Printing KSF branch in Tel Aviv-Yafo
-There are 2 item in the catalog
+Connecting a mouse
+Connecting a webcam
+id 8: Samsung 5$, Wireless, Red, Webcam with HD resolution is Connecting to computer: id 7: Maple 120$, Laptop, AMD
+Failed connection attempt
+There are 2 connection to id 7: Maple 120$, Laptop, AMD
 id 5: Sasio 20$, Wireless, Gold, Keyboard with 24 keys
-id 7: Maple 120$, Laptop, AMD
+id 6: Goldline 10$, Wired, White, Mouse with dpi : 1000
+
+There are 1 connection to id 7: Maple 120$, Laptop, AMD
+id 5: Sasio 20$, Wireless, Gold, Keyboard with 24 keys
+
+Connecting a mouse
+id 6: Goldline 10$, Wired, White, Mouse with dpi : 1000 is Connecting to computer: id 7: Maple 120$, Laptop, AMD
+
+Trying to add an item to a full catalog
+
+Trying to delete an item  with a non existing id
+
+finest computer: id 7: Maple 120$, Laptop, AMD
+Throwing away an item
+Trying to get an item with a non existing type:
+
+Throwing away an item
+There are 1 connection to id 7: Maple 120$, Laptop, AMD
+id 5: Sasio 20$, Wireless, Gold, Keyboard with 24 keys
 Throwing away an item
 Throwing away an item
 Throwing away an item
@@ -19,3 +51,4 @@ Throwing away an item
 Throwing away an item
 Throwing away an item
 Throwing away an item
+

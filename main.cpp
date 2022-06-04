@@ -13,10 +13,10 @@ int main()
 {
 	//freopen("output_main.txt", "w", stdout);
 	Item* items[TEST_MAIN_SIZE]; //the array is only here for code organization
-	items[0] = new Computer(60, "Dell", "Intel", true, 3);
+	items[0] = new Computer(60, "Dell", "Intel", true,3);
 	items[0]->setPrice(70);
-	items[1] = new Computer(100, "Apple", "AMD", false, 2);
-	items[2] = new Mouse(5, "Pilot", "Red", true, 100);
+	items[1] = new Computer(100, "Apple", "AMD", false,2);
+	items[2] = new Mouse(5, "Pilot", "Red",true, 100);
 	items[3] = new Keyboard(10, "Casio", "Silver", false, 26);
 
 	Branch haifaBranch("Haifa", 14);
@@ -38,7 +38,7 @@ int main()
 	std::cout << std::endl;
 	Keyboard* keyboardPtr = new Keyboard(20, "Sasio", "Gold", true, 24);
 	Mouse* mousePtr = new Mouse(10, "Goldline", "White", false, 1000);
-	Computer* computerPtr = new Computer(120, "Maple", "AMD", true, 2);
+	Computer* computerPtr = new Computer(120, "Maple", "AMD", true,2);
 	Webcam* webcamPtr = new Webcam(5, "Samsung", "Red", true, "HD");
 	try
 	{
@@ -81,10 +81,10 @@ int main()
 	std::cout << std::endl;
 	try
 	{
-		telAvivBranch.deleteItem(webcamPtr->getId());
+		 telAvivBranch.deleteItem(webcamPtr->getId());
 		delete telAvivBranch.deleteItem(mousePtr->getId());
 	}
-	catch (std::exception& e)
+	catch(std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -93,9 +93,9 @@ int main()
 	{
 		haifaBranch.deleteItem(items[0]->getId());
 		telAvivBranch.addItem(items[0]);
-		Computer* ptr = new Computer(0, "", "", false, 0);
+		Computer* ptr = new Computer(0,"","",false,0);
 		Computer* finest = telAvivBranch.retrieveFinest(ptr);
-		std::cout << "finest computer: " << string(*finest) << std::endl;
+		std::cout <<"finest computer: "<<string(*finest) << std::endl;
 		delete ptr;
 		Webcam* finestWc = telAvivBranch.retrieveFinest(webcamPtr);
 		std::cout << string(*finestWc) << std::endl;
