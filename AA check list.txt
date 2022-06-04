@@ -14,10 +14,10 @@
     [ ] - capacity saved in const variable
 [ ] Copy constructor
 [ ] Destructor
-[ ] void addItem (Item* item)
+[ ] void addItem (Item* item) throws()
     [ ] - Check for exception when added more then capacity items
     [ ] - Check for uppending at the end of the vector
-[ ] Item* deleteItem (const int ID)
+[ ] Item* deleteItem (const int ID) throws()
     [ ] - Check for exception on non existing ID
 [ ] vector<Item*> getCatalog ()
     [c] - Check when branch is empty
@@ -26,7 +26,7 @@
 [ ] void print_catalog_by_price() const
     [ ] - Check for stable sort
     [ ] - Check when price changed
-[ ] T* retrieveFinest(T* item)
+[ ] T* retrieveFinest(T* item) throws()
     [ ] - Check exception when no item of type T in the brunch
 [ ] string getLocation () const
 [ ] void setLocation (const string& location)
@@ -70,7 +70,7 @@
 [ ] string getColor () const
 [ ] void setIsWireless (const bool isWireless)
 [ ] bool getIsWireless () const
-[ ] virtual void connect(const Computer& computer) = 0
+[ ] virtual void connect(const Computer& computer) throws() = 0
     [ ] - Check right print on casted argument e.g. PeripheralDevice* mouse = new Mouse()
     [ ] - Try minimazing code duplication
     [ ] - Exception connecting to more then one computers
@@ -138,6 +138,7 @@
 [ ][ ][ ][ ][ ][ ][ ][ ][ ] - Right use of price 'private', 'protected', 'public'
 [ ][ ][ ][ ][ ][ ][ ][ ][ ] - Set comments
 [ ][ ][ ][ ][ ][ ][ ][ ][ ] - Check forum for updates and notes
+[ ][ ][ ][ ][ ][ ][ ][ ][ ] - Added throws() to functions signature
  ^  ^  ^  ^  ^  ^  ^  ^  ^
  |  |  |  |  |  |  |  |  + Mouse
  |  |  |  |  |  |  |  + Keyboard
