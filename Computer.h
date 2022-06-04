@@ -7,15 +7,21 @@
 #include "Item.h"
 #include <string>
 #include <iostream>
+#include <PeripheralDevice.h>
+#include <list>
 
 using std::string;
 using std::to_string;
+using std::list;
 
 class Computer : public Item
 {
 private:
 	string cpu ;
 	bool isLaptop;
+
+	const int ports;
+	list<PeripheralDevice*> connectedDevices;
 
 public:
 
@@ -26,8 +32,9 @@ public:
 	 * @param manufacturer - computer's brand
 	 * @param cpu - computer's cpu brand
 	 * @param isLaptop - is laptop / desktop
+	 * @param ports - number of USB ports
 	 */
-	Computer(const int price, const string& manufacturer, const string& cpu, const bool isLaptop);
+	Computer(const int price, const string& manufacturer, const string& cpu, const bool isLaptop, const int ports);
 
 	/**
 	 * @brief Set computer's CPU.
@@ -59,12 +66,26 @@ public:
 	bool getIsLaptop() const;
 
 	/**
+	 * @brief Get number of USB ports
+	 * 
+	 * @return int - number of ports
+	 */
+	int getPorts() const;
+	
+	/**
+	 * @brief Prints connected devices to the computer
+	 * 
+	 */
+	void print_connected () const;
+
+	/**
 	 * @brief Return string representing the computer
 	 * 
 	 * @return string
 	 */
 	operator string() const override;
 
+	friend void PeripheralDevice::connect (const Computer& computer) const;
 };
 
 #endif /* COMPUTER_H */

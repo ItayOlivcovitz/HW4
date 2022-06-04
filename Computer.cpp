@@ -12,9 +12,10 @@
  * @param manufacturer - computer's brand
  * @param cpu - computer's cpu brand
  * @param isLaptop - is laptop / desktop
+ * @param ports - number of USB ports
  */
-Computer::Computer(const int price, const string& manufacturer, const string& cpu, const bool isLaptop)
-	: Item(price, manufacturer), cpu(cpu), isLaptop(isLaptop)
+Computer::Computer(const int price, const string& manufacturer, const string& cpu, const bool isLaptop, const int ports)
+	: Item(price, manufacturer), cpu(cpu), isLaptop(isLaptop), ports(ports)
 {}
 
 /**
@@ -56,6 +57,30 @@ void Computer::setIsLaptop(const bool isLaptop)
 bool Computer::getIsLaptop() const
 {
 	return this->isLaptop;
+}
+
+/**
+ * @brief Get number of USB ports
+ * 
+ * @return int - number of ports
+ */
+int Computer::getPorts() const
+{
+	return this->ports;
+}
+
+/**
+ * @brief Prints connected devices to the computer
+ * 
+ */
+void Computer::print_connected () const
+{
+	// Print header
+	cout << "There are " << this->connectedDevices.size() << " connection to " << string(*this);
+
+	// Print all connected devices
+	for (PeripheralDevice* device : connectedDevices)
+		cout << string(*device);
 }
 
 /**
