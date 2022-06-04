@@ -76,7 +76,19 @@ public:
      */
     virtual operator string() const = 0;
 
-    // Destructor
+    /**
+     * @brief comperator with another item
+     * 
+     * @param other - item to compare with
+     * @return true - if same item
+     * @return false - otherwise
+     */
+    bool operator==(const Item& other) const;
+
+    /**
+     * @brief Destroy the Item object
+     * 
+     */
     virtual ~Item();
 };
 

@@ -80,7 +80,22 @@ Item::operator string() const
     return s_id + ": " + this->manufacturer + " " + s_price;
 }
 
-// Destructor
+/**
+ * @brief comperator with another item
+ * 
+ * @param other - item to compare with
+ * @return true - if same item
+ * @return false - otherwise
+ */
+bool Item::operator==(const Item& other) const
+{
+    return id == other.id;
+}
+    
+/**
+ * @brief Destroy the Item object
+ * 
+ */
 Item::~Item ()
 {
     std::cout << "Throwing away an item" << std::endl;
