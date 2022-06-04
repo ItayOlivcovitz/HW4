@@ -5,64 +5,94 @@
 #define BRANCH_H
 
 #include "Item.h"
+#include "HWExceptions.h""
 #include <string>
+#include <vector>
+#include <map>
+
 
 #define STORE_SIZE 10
 #define INITIAL_SIZE 0
 
 using std::string;
+using std::vector;
+using std::map;
+using std::exception;
 
 class Branch 
 {
 private:
 	// Private variables
-	Item** itemCatalog;
 	string location;
+	vector<Item*> catalog;
 	int capacity;	// Not representing how much items in brunch !
 
-	// Check the index for the next item
-	int nextItemIndex () const;
 
-	// Return how many items in the catalog
-	int howManyItems () const;
+	/**
+	 * @brief Create map <price,vector>.
+	 *
+	 * @param Vector - The catalog
+	 * @return map<price,vector> - A map when the key is price
+	 */
+	map<int, vector<Item*>> createMap(const vector<Item*>vec) const;
 
 public:
 	/**
 	 * @brief Construct a new Branch object.
-	 * 
-	 * @param location - location of Branch
+	 *
+	 * @param location - location and capacity of Branch
 	 */
-	Branch(const string& location);
+	Branch(const string& location, const int capacity);
+
 
 	/**
 	 * @brief Add item to the branch.
-	 * 
+	 *
 	 * @param item - item to be added
 	 */
 	void addItem(Item* item);
 
 	/**
 	 * @brief Get array for Item pointers inside this branch.
-	 * 
+	 *
 	 * @param num - how much items int returned array
 	 * @return Item** - array of brunch items
 	 */
-	Item** getCatalog(int& size);
-	
+	vector<Item*> getCatalog(int& size);
+
 	/**
-	 * @brief Set the brunch location.
-	 * 
-	 * @param location - new location to set
+	 * @brief Delete Item from catalog by ID.
+	 *
+	 * @param ID - The ID of the item
+	 * @return *Item - ptr to the Item
 	 */
-	void setLocation(const string& location) ;
+	Item* deleteItem(const int ID);
+	
+
+	/**
+     * @brief Set the brunch location.
+     *
+     * @param location - new location to set
+     */
+	void setLocation(const string & location);
 
 	/**
 	 * @brief Get the brunch location
-	 * 
+	 *
 	 * @return std::string - brunch's location
-	 */
+     */
 	std::string getLocation() const;
 
+	/**
+    * @brief Print the catalog by ID
+    */
+	void print_catalog_by_id();
+
+	/**
+	* @brief Print the catalog by price
+	*/
+	void print_catalog_by_price();
+	
 	// Destractor
 	~Branch();
 };
