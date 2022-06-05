@@ -3,56 +3,64 @@
 using std::string;
 class HWExceptions : public std::exception 
 {
-    string error;
+    
 public:
 
-    /**
-     * @brief Set error to ExistingItemError.
-     */
-    void ExistingItemError() 
+    class ExistingItemError : public exception
     {
-        this->error = "Trying to add an item with an id already in the catalog"; 
-    }
+        /**
+         * @brief Set error to ExistingItemError.
+         */
+        virtual const char* what() const throw()
+        {
+            return "Trying to add an item with an id already in the catalog";
+        }
+    }ExistingItemError;
+    
+    class FullCatalogError : public exception
+    {
+        /**
+         * brief Set error to FullCatalogError.
+         */
+        virtual const char* what() const throw()
+        {
+            return "Trying to add an item to a full catalog";
+        }
+    }FullCatalogError;
 
-    /**
-     * @brief Set error to FullCatalogError.
-     */
-    void FullCatalogError() 
+    class NonExistingItemError : public exception
     {
-        this->error = "Trying to add an item to a full catalog";
-    }
+        /**
+         * brief Set error to NonExistingItemError.
+         */
+        virtual const char* what() const throw()
+        {
+            return "Trying to delete an item with a non existing id";
+        }
+    }NonExistingItemError;
 
-    /**
-     * @brief Set error to NonExistingItemError.
-     */
-    void NonExistingItemError() 
+    class NoneExistingItemTypeError : public exception
     {
-        this->error = "Trying to delete an item with a non existing id";
-    }
+        /**
+         * brief Set error to NoneExistingItemTypeError.
+         */
+        virtual const char* what() const throw()
+        {
+            return "Trying to get an item with a non existing type";
+        }
+    }NoneExistingItemTypeError;
+   
+    class ConnectError : public exception
+    {
+        /**
+         * brief Set error to ConnectError.
+         */
+        virtual const char* what() const throw()
+        {
+            return "Failed connection attempt";
+        }
+    }ConnectError;
 
-    /**
-     * @brief Set error to NoneExistingItemTypeError.
-     */
-    void NoneExistingItemTypeError() 
-    {
-        this->error = "Trying to get an item with a non existing type";  
-    }
+    
 
-    /**
-    * @brief Set error to ConnectError.
-    */
-    void ConnectError() 
-    {
-        this->error = "Failed connection attempt";
-    }
-
-    /**
-     * @brief Get what heppend.
-     *
-     * @return char - error description
-     */
-    char const* what() const
-    {
-        return this->error.c_str();
-    }
 };
