@@ -1,9 +1,16 @@
 #ifndef PERIPHERALDEVICE_H
 #define PERIPHERALDEVICE_H
 
-#include "Computer.h"
+#include "Item.h"
 #include <iostream>
 #include <string>
+#include <list>
+#include <algorithm>
+#include "HWExceptions.h"
+
+#include "Computer.h"
+
+class Computer;
 
 using std::string;
 using std::cout;
@@ -14,6 +21,8 @@ class PeripheralDevice : public Item
 private:
     string color;
     bool isWireless;
+
+    Computer* connectedComputer;
 
 public:
 
@@ -68,7 +77,19 @@ public:
      * 
      * @param computer - to be connected into
      */
-    virtual void connect (const Computer& computer) const = 0;
+    virtual void connect (Computer* computer) = 0;
+
+    /**
+     * @brief Disconnects from computer (if connected).
+     * 
+     */
+    void disconnect ();
+
+    /**
+     * @brief Destroy the Peripheral Device object
+     * 
+     */
+    virtual ~PeripheralDevice ();
 };
 
 #endif /* PERIPHERALDEVICE_H */
