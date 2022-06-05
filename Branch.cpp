@@ -6,7 +6,6 @@
 
 
 
-
 /**
  * @brief Construct a new Branch object
  * 
@@ -16,7 +15,6 @@ Branch::Branch(const string& location,const int capacity)
 	: location(location), capacity(capacity)
 {
 }
-
 
 /**
  * @brief Add item to the branch.
@@ -31,16 +29,14 @@ void Branch::addItem(Item* item)
 		if (this->catalog.capacity() >= this->capacity)
 		{
 			HWExceptions e;
-			e.FullCatalogError();
-			throw e;
+			throw e.FullCatalogError;
 		}
 		for (auto i : this->catalog)
 		{
 			if ( i == item)
 			{
 				HWExceptions e;
-				e.ExistingItemError();
-				throw e;
+				throw e.ExistingItemError;
 			}
 		}
     }
@@ -111,45 +107,31 @@ void Branch:: print_catalog_by_id()
 }
 
 /**
+ * @brief help to sort the vector
+ *
+ * @return bool - if Item i< Item j return true
+ */
+bool Branch::compare_Price(const Item* i, const Item* j)
+{
+	
+	return (i->getPrice() < j->getPrice());
+}
+
+
+/**
  * @brief Print the catalog by price
  */
 void Branch::print_catalog_by_price()
 {
-	map<int, vector<Item*>> map_By_Price;
-	map_By_Price = createMap(this->catalog);
+	vector<Item*> vector_By_Price;
+	vector_By_Price.assign(this->catalog.begin(), this->catalog.end());
+	std::stable_sort(vector_By_Price.begin(), vector_By_Price.end(),compare_Price);
 
-	for (auto i : map_By_Price)
+	for (auto it = vector_By_Price.cbegin(); it != vector_By_Price.cend(); it++)
 	{
-		for (auto j : i.second)
-		{
-			std::cout << string(*j) << std::endl;
-		}
+		std::cout << string(**it) << std::endl;
 	}
-}
 
-/**
- * @brief Create map <price,vector>.
- *
- * @param Vector - The catalog
- * @return map<price,vector> - A map when the key is price
- */
-map<int, vector<Item*>> Branch::createMap(const vector<Item*> vec) const
-{
-	map<int, vector<Item*>> new_Map;
-	for (auto i : vec)
-	{
-		vector<Item*> new_Vector;
-		new_Vector.push_back(i);
-		for (auto j : vec)
-		{
-			if (i->getPrice() == j->getPrice() && i != j)
-			{
-				new_Vector.push_back(j);
-			}
-		}
-		new_Map[i->getPrice()] = new_Vector;
-	}
-	return new_Map;
 }
 
 // Destractor

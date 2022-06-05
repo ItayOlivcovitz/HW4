@@ -8,6 +8,7 @@
 #include "HWExceptions.h""
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <map>
 
 
@@ -19,6 +20,7 @@ using std::vector;
 using std::map;
 using std::exception;
 
+
 class Branch 
 {
 private:
@@ -27,14 +29,8 @@ private:
 	vector<Item*> catalog;
 	int capacity;	// Not representing how much items in brunch !
 
-
-	/**
-	 * @brief Create map <price,vector>.
-	 *
-	 * @param Vector - The catalog
-	 * @return map<price,vector> - A map when the key is price
-	 */
-	map<int, vector<Item*>> createMap(const vector<Item*>vec) const;
+	static bool compare_Price(const Item* i, const Item* j) ;
+	
 
 public:
 	/**
