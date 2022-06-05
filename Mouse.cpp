@@ -53,7 +53,7 @@ Mouse::operator string() const
  * 
  * @param computer - to connect to
  */
-void Mouse::connect(const Computer& computer) const
+void Mouse::connect(Computer* computer)
 {
 	cout << "Connecting a mouse" << endl;
 	PeripheralDevice::connect (computer);

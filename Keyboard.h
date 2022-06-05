@@ -58,7 +58,7 @@ public:
      * 
      * @param computer - to be connected into
      */
-	void connect(const Computer& computer) const override;
+	void connect(Computer* computer) override;
 };
 
 #endif /* KEYBOARD_H */

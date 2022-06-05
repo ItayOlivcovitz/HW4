@@ -58,7 +58,7 @@ public:
 	 * 
 	 * @param computer - to connect to
 	 */
-	void connect(const Computer& computer) const override;
+	void connect(Computer* computer) override;
 };
 
 #endif /* MOUSE_H */

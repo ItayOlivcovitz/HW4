@@ -53,7 +53,7 @@ Keyboard::operator string() const
  * 
  * @param computer - to be connected into
  */
-void Keyboard::connect(const Computer & computer) const
+void Keyboard::connect(Computer* computer)
 {
 	cout << "Connecting a keyboard" << endl;
 	PeripheralDevice::connect (computer);
