@@ -7,8 +7,10 @@
 #include "Item.h"
 #include <string>
 #include <iostream>
-#include <PeripheralDevice.h>
 #include <list>
+
+#include "PeripheralDevice.h"
+class PeripheralDevice;
 
 using std::string;
 using std::to_string;
@@ -79,13 +81,18 @@ public:
 	void print_connected () const;
 
 	/**
+	 * @brief Get the Connected Devices.
+	 * 
+	 * @return list<PeripheralDevice*> - list of connected devices
+	 */
+	list<PeripheralDevice*>& getConnectedDevices ();
+
+	/**
 	 * @brief Return string representing the computer
 	 * 
 	 * @return string
 	 */
 	operator string() const override;
-
-	friend void PeripheralDevice::connect (const Computer& computer) const;
 };
 
 #endif /* COMPUTER_H */

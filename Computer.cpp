@@ -1,9 +1,7 @@
 //Student1 Daniel Penkov, penkovdany@gmail.com, 207925504
 //Student2 Itay Olivcovitz, Itay.olivcovitz@gmail.com, 207745639
 
-#include <iostream>
 #include "Computer.h"
-#include "Item.h"
 
 /**
  * @brief Construct a new Computer object.
@@ -76,11 +74,11 @@ int Computer::getPorts() const
 void Computer::print_connected () const
 {
 	// Print header
-	cout << "There are " << this->connectedDevices.size() << " connection to " << string(*this);
+	cout << "There are " << this->connectedDevices.size() << " connection to " << string(*this) << endl;
 
 	// Print all connected devices
 	for (PeripheralDevice* device : connectedDevices)
-		cout << string(*device);
+		cout << string(*device) << endl;
 }
 
 /**
@@ -98,5 +96,15 @@ Computer::operator std::string() const
 
 	// Append to the original Item's string
 	return Item::operator string() + ", " + s_isLaptop + ", " + s_cpu;
+}
+
+/**
+ * @brief Get the Connected Devices.
+ * 
+ * @return list<PeripheralDevice*> - list of connected devices
+ */
+list<PeripheralDevice*>& Computer::getConnectedDevices ()
+{
+	return this->connectedDevices;
 }
 
