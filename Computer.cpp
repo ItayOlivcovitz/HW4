@@ -103,8 +103,8 @@ Computer::operator std::string() const
  * 
  * @return list<PeripheralDevice*> - list of connected devices
  */
-list<PeripheralDevice*>& Computer::getConnectedDevices ()
+list<PeripheralDevice*>* Computer::getConnectedDevices ()
 {
-	return this->connectedDevices;
+	return &this->connectedDevices;
 }
 

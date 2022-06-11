@@ -95,10 +95,10 @@ int main()
 		telAvivBranch.addItem(items[0]);
 		Computer* ptr = new Computer(0,"","",false,0);
 		Computer* finest = telAvivBranch.retrieveFinest(ptr);
-		std::cout <<"finest computer: "<<string(*finest) << std::endl;
+		std::cout <<"finest computer: "<<std::string(*finest) << std::endl;
 		delete ptr;
 		Webcam* finestWc = telAvivBranch.retrieveFinest(webcamPtr);
-		std::cout << string(*finestWc) << std::endl;
+		std::cout << std::string(*finestWc) << std::endl;
 	}
 	catch (std::exception& e)
 	{

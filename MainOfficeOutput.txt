@@ -1,0 +1,27 @@
+Printing KSF branch in Haifa
+There are 4 item in the catalog
+Catalog value is: 185
+id 1: Dell 70$, Laptop, Intel
+id 2: Apple 100$, Desktop, AMD
+id 3: Pilot 5$, Wireless, Red, Mouse with dpi : 100
+id 4: Casio 10$, Wired, Silver, Keyboard with 26 keys
+
+Printing KSF branch in Haifa
+There are 4 item in the catalog
+Catalog value is: 185
+id 3: Pilot 5$, Wireless, Red, Mouse with dpi : 100
+id 4: Casio 10$, Wired, Silver, Keyboard with 26 keys
+id 1: Dell 70$, Laptop, Intel
+id 2: Apple 100$, Desktop, AMD
+
+Trying to add a branch with an already existing location
+Trying to delete a branch with an non existing location
+Throwing away an item
+Throwing away an item
+Throwing away an item
+Throwing away an item
+There are 1 KSP branches
+Printing KSF branch in Tel-Aviv
+There are 0 item in the catalog
+Catalog value is: 0
+End of main
