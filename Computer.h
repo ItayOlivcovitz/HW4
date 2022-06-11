@@ -16,6 +16,9 @@ using std::string;
 using std::to_string;
 using std::list;
 
+using std::cout;
+using std::endl;
+
 class Computer : public Item
 {
 private:
@@ -85,7 +88,7 @@ public:
 	 * 
 	 * @return list<PeripheralDevice*> - list of connected devices
 	 */
-	list<PeripheralDevice*>& getConnectedDevices ();
+	list<PeripheralDevice*>* getConnectedDevices ();
 
 	/**
 	 * @brief Return string representing the computer
