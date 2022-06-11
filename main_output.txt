@@ -1,4 +1,4 @@
-Trying to add a item with an id already in the catalog
+Trying to add an item with an id already in the catalog
 Printing KSF branch in Haifa
 There are 4 item in the catalog
 Catalog value is: 185
@@ -35,11 +35,11 @@ id 6: Goldline 10$, Wired, White, Mouse with dpi : 1000 is Connecting to compute
 
 Trying to add an item to a full catalog
 
-Trying to delete an item  with a non existing id
+Trying to delete an item with a non existing id
 
 finest computer: id 7: Maple 120$, Laptop, AMD
 Throwing away an item
-Trying to get an item with a non existing type:
+Trying to get an item with a non existing type
 
 Throwing away an item
 There are 1 connection to id 7: Maple 120$, Laptop, AMD
@@ -51,4 +51,3 @@ Throwing away an item
 Throwing away an item
 Throwing away an item
 Throwing away an item
-
