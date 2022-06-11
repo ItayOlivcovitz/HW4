@@ -1,3 +1,5 @@
+//Student1 Daniel Penkov, penkovdany@gmail.com, 207925504
+//Student2 Itay Olivcovitz, Itay.olivcovitz@gmail.com, 207745639
 
 #include "PeripheralDevice.h"
 
@@ -73,30 +75,30 @@ PeripheralDevice::operator string() const
  */
 void PeripheralDevice::connect (Computer* computer)
 {
-    // Print 'connecting to' message
-    cout << string(*this) << " is Connecting to computer: " << computer->operator string() << endl;
-
     // Already connected
     if (connectedComputer != NULL && connectedComputer == computer)
         return;
-    
+
     // Connected to other computer
     if (connectedComputer != NULL && connectedComputer != computer)
-        throw 1;    // TODO : set right throw
+        throw ConnectError();
+
+    // Print 'connecting to' message
+    cout << string(*this) << " is Connecting to computer: " << string(*computer) << endl;
 
     // Get computer connected list
     list<PeripheralDevice*>& connectedDevices = computer->getConnectedDevices();
 
     // Check if available ports
     if (connectedDevices.size() == computer->getPorts())
-        throw 2;    // TODO : set right throw
+        throw ConnectError();
     
     // Check if device of same type connected
     for (PeripheralDevice* device : connectedDevices)
     {
         if (typeid(device) == typeid(this))
         {
-            throw 3;    // TODO : set right throw
+            throw ConnectError();
         }
     }
     

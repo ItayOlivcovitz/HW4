@@ -1,3 +1,6 @@
+//Student1 Daniel Penkov, penkovdany@gmail.com, 207925504
+//Student2 Itay Olivcovitz, Itay.olivcovitz@gmail.com, 207745639
+
 #ifndef PERIPHERALDEVICE_H
 #define PERIPHERALDEVICE_H
 
