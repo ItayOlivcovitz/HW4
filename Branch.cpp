@@ -119,6 +119,16 @@ vector<Item*> Branch::getCatalog()
 }
 
 /**
+ * @brief Gets the max capacity of this branch
+ * 
+ * @return int - max capacity
+ */
+int Branch::getCapacity() const
+{
+	return this->capacity;
+}
+
+/**
  * @brief Set the brunch location.
  * 
  * @param location - new location to set

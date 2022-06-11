@@ -117,11 +117,19 @@ public:
 	vector<Item*> getCatalog();
 	
 	/**
+	 * @brief Gets the max capacity of this branch
+	 * 
+	 * @return int - max capacity
+	 */
+	int getCapacity() const;
+	
+	/**
      * @brief Set the brunch location.
      *
      * @param location - new location to set
      */
 	void setLocation(const string & location);
+
 
 	/**
 	 * @brief Get the brunch location
