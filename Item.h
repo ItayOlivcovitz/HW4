@@ -4,6 +4,8 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#define ID 207925504
+
 #include <string>
 #include <iostream>
 
