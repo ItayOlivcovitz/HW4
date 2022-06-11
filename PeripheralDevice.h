@@ -8,7 +8,6 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include <algorithm>
 #include "HWExceptions.h"
 
 #include "Computer.h"
