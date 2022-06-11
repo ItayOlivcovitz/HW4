@@ -4,7 +4,25 @@
 #include "Branch.h"
 #include <iostream>
 
+/**
+ * @brief help to sort the vector by price
+ *
+ * @return bool - i.price < j.price
+ */
+bool Branch::compare_Price(const Item* i, const Item* j)
+{
+	return i->getPrice() < j->getPrice();
+}
 
+/**
+ * @brief help to sort the vector by ID
+ *
+ * @return bool - i.ID < j.ID
+ */
+bool Branch::compare_ID(const Item* i, const Item* j)
+{
+	return i->getId() < j->getId();
+}
 
 /**
  * @brief Construct a new Branch object
@@ -13,8 +31,16 @@
  */
 Branch::Branch(const string& location,const int capacity)
 	: location(location), capacity(capacity)
-{
-}
+{}
+
+/**
+ * @brief Construct a new Branch with parameters of existing one
+ * 
+ * @param other - branch to use the parameters 
+ */
+Branch::Branch(const Branch& other)
+	: location(other.location), capacity(other.capacity)
+{}
 
 /**
  * @brief Add item to the branch.
@@ -23,86 +49,73 @@ Branch::Branch(const string& location,const int capacity)
  */
 void Branch::addItem(Item* item)
 {
-
-	if (!this->catalog.empty())
+	// Capacity at max
+	if (this->catalog.size() >= this->capacity)
 	{
-		if (this->catalog.capacity() >= this->capacity)
-		{
-			
-			throw FullCatalogError();
-		}
-		for (auto i : this->catalog)
-		{
-			if ( i == item)
-			{
-				
-				throw ExistingItemError();
-			}
-		}
-    }
+		throw FullCatalogError();
+	}
 
+	// Item in catalog
+	for (Item* i : this->catalog)
+	{
+		if (*i == *item)
+		{
+			throw ExistingItemError();
+		}
+	}
+
+	// Add the item
 	this->catalog.push_back(item);
 }
 
 /**
-	 * @brief Delete item from the catalog.
-	 *
-	 * @param ID - the ID
-	 * @return Item* - ptr to the ID
-	 */
-Item* Branch::deleteItem(const int ID) const
-{
-	Item* ptr = NULL;
-	for (auto itr : this->catalog)
-	{
-		if (itr->getId() == ID)
-		{
-			ptr = itr;
-		}
-	}
-	if (ptr)
-	{
-		throw NonExistingItemError();
-	}
-	return ptr;
-}
-
-/**
-	 * @brief evaluate the catalog.
-	 *
-	 *
-	 * @return int - that represent the price of all the item in the catalog
-	 */
-Branch::operator int()
-  {
-	int value = 0;
-	for (auto itr : this->catalog)
-	{
-		value += itr->getPrice();
-	}
-	return value;
-  }
-/**
- * @brief Get array for Item pointers inside this branch.
- * 
- * @param num - how much items int returned array
- * @return Item** - array of brunch items
+ * @brief Delete item from the catalog.
+ *
+ * @param ID - the ID
+ * @return Item* - pointer to removed item
  */
-vector<Item *> Branch::getCatalog(int &size)  
-{
-	return this->catalog;
-}
-
-/**
-	 * @brief Delete Item from catalog by ID.
-	 *
-	 * @param ID - The ID of the item
-	 * @return *Item - ptr to the Item
-	 */
 Item* Branch::deleteItem(const int ID)
 {
-	//this->catalog.erase[1]
-	return this->catalog[1];
+	// Iterate throw the items in the catalog
+	for (auto iter = this->catalog.begin(); iter != this->catalog.end(); ++iter)
+	{
+		// If found the id
+		if ((*iter)->getId() == ID)
+		{
+			Item* ptr = *iter;
+			this->catalog.erase (iter);	// Remove the item from the vector
+			return ptr;		// Return the removed item
+		}
+	}
+
+	// If got to here - no items found
+	throw NonExistingItemError();
+}
+
+/**
+ * @brief evaluate the catalog.
+ *
+ * @return int - that represent the price of all the item in the catalog
+ */
+Branch::operator int() const
+{
+	int value = 0;	// Sum starts from zero
+
+	// Sum all item's prices
+	for (Item* itr : this->catalog)
+		value += itr->getPrice();
+	
+	return value;
+}
+
+/**
+ * @brief Get the Catalog
+ * 
+ * @return vector<Item*> - the catalog
+ */
+vector<Item*> Branch::getCatalog()  
+{
+	return this->catalog;
 }
 
 /**
@@ -127,62 +140,61 @@ std::string Branch::getLocation() const
 
 /**
  * @brief Print the catalog by ID
+ * 
  */
-void Branch:: print_catalog_by_id()
+void Branch::print_catalog_by_id() const
 {
-	
-	std::cout << "Printing KSF branch in " << this->getLocation() << std::endl;
-	std::cout << "There are " << this->catalog.size() <<" item in the catalog"<< std::endl;
-	std::cout << "Catalog value is: " << int(*this) << std::endl;
+	// Copy all the items to new vector
+	vector<Item*> items;
+	items.assign(this->catalog.begin(), this->catalog.end());
 
-	vector<Item*> vector_By_Price;
-	vector_By_Price.assign(this->catalog.begin(), this->catalog.end());
-	std::stable_sort(vector_By_Price.begin(), vector_By_Price.end(), compare_ID);
+	// Sort by ID
+	std::stable_sort(items.begin(), items.end(), compare_ID);
 
-	for (auto it = vector_By_Price.cbegin(); it != vector_By_Price.cend(); it++)
-	{
-		std::cout << string(**it) << std::endl;
-	}
-}
-
-/**
- * @brief help to sort the vector
- *
- * @return bool - if Item i< Item j return true
- */
-bool Branch::compare_Price(const Item* i, const Item* j)
-{
-	return (i->getPrice() < j->getPrice());
-}
-
-/**
- * @brief help to sort the vector
- *
- * @return bool - if Item i< Item j return true
- */
-bool Branch::compare_ID(const Item* i, const Item* j)
-{
-	return (i->getId() < j->getId());
+	// Print the items
+	print_branch(items);
 }
 
 
 /**
  * @brief Print the catalog by price
+ * 
  */
-void Branch::print_catalog_by_price()
+void Branch::print_catalog_by_price() const
 {
-	vector<Item*> vector_By_Price;
-	vector_By_Price.assign(this->catalog.begin(), this->catalog.end());
-	std::stable_sort(vector_By_Price.begin(), vector_By_Price.end(),compare_Price);
+	// Copy all the items to new vector
+	vector<Item*> items;
+	items.assign(this->catalog.begin(), this->catalog.end());
 
-	for (auto it = vector_By_Price.cbegin(); it != vector_By_Price.cend(); it++)
-	{
-		std::cout << string(**it) << std::endl;
-	}
+	// Sort by price
+	std::stable_sort(items.begin(), items.end(), compare_Price);
 
+	// Print the items
+	print_branch(items);
 }
 
-// Destractor
+/**
+ * @brief Print vector of items
+ * 
+ */
+void Branch::print_branch(const vector<Item*>& items) const
+{
+	// Print title
+    cout << "Printing KSF branch in " << this->getLocation() << endl;
+    cout << "There are " << this->catalog.size() << " item in the catalog" << endl;
+    cout << "Catalog value is: " << int(*this) << endl;
+
+	for (Item* item : items)
+		cout << string(*item) << endl;
+}
+
+/**
+ * @brief Destroy the Branch object
+ * 
+ */
 Branch::~Branch()
 {
+	// Delete all items in catalog
+	for (Item* item : this->catalog)
+		delete item;
 }

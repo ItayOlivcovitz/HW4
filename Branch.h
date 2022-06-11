@@ -5,21 +5,16 @@
 #define BRANCH_H
 
 #include "Item.h"
-#include "HWExceptions.h""
+#include "HWExceptions.h"
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <map>
-
-
-#define STORE_SIZE 10
-#define INITIAL_SIZE 0
 
 using std::string;
 using std::vector;
-using std::map;
 using std::exception;
-
+using std::cout;
+using std::endl;
 
 class Branch 
 {
@@ -30,57 +25,68 @@ private:
 	int capacity;	// Not representing how much items in brunch !
 
 	/**
- * @brief help to sort the vector
- *
- * @return bool - if Item i< Item j return true
- */
-	static bool compare_Price(const Item* i, const Item* j) ;
+	 * @brief help to sort the vector by price
+	 *
+	 * @return bool - i.price < j.price
+	 */
+	static bool compare_Price(const Item* i, const Item* j);
 
 	/**
- * @brief help to sort the vector
- *
- * @return bool - if Item i< Item j return true
- */
+	 * @brief help to sort the vector by ID
+	 *
+	 * @return bool - i.ID < j.ID
+	 */
 	static bool compare_ID(const Item* i, const Item* j);
 	
-
 public:
 	/**
-	 * @brief Construct a new Branch object.
-	 *
-	 * @param location - location and capacity of Branch
+	 * @brief Construct a new Branch
+	 * 
+	 * @param location - branch location
+	 * @param capacity - branch max capacity
 	 */
-	Branch(const string& location, const int capacity);
+	Branch(const string& location = "~", const int capacity = 0);
 
 	/**
-	 * @brief retrieve the most expensive obj
+	 * @brief Construct a new Branch with parameters of existing one
+	 * 
+	 * @param other - branch to use the parameters 
+	 */
+	Branch(const Branch& other);
+
+	/**
+	 * @brief retrieve the most expensive item of type T
 	 *
 	 * @param obj - the define the type
 	 */
 	template<class T>
 	T* retrieveFinest(T* obj)
 	{
-		T* ptr;
-		Item* highest_Price;
+		Item* highest_Price = NULL;	// Will store the expensivest item
 
-		for (auto itr : this->catalog)
+		// Iterate throw all items in catalog
+		for (Item* item : this->catalog)
 		{
-			if (dynamic_cast<T*>(itr))
+			// If item is of type T
+			if ( dynamic_cast<T*>(item) )
 			{
+				// First item to find
 				if (highest_Price == NULL)
-				{
-					highest_Price = itr;
-				}
-
-				else if(highest_Price->getPrice() < itr->getPrice())
-				{
-					highest_Price = itr;
-				}
+					highest_Price = item;
+				
+				// Update if expensiver
+				else if(highest_Price->getPrice() < item->getPrice())
+					highest_Price = item;
 			}
 		}
 
-		return dynamic_cast<T*>(highest_Price);
+		// No such item of such type in the branch
+		if ( !highest_Price )
+			throw NonExistingItemError();
+
+		return dynamic_cast<T*>(highest_Price);	// Will allways succeed
 	}
+
 	/**
 	 * @brief Add item to the branch.
 	 *
@@ -92,35 +98,24 @@ public:
 	 * @brief Delete item from the catalog.
 	 *
 	 * @param ID - the ID
-	 * @return Item* - ptr to the ID
-	 */
-	Item* deleteItem(const int ID) const;
-	
-	/**
-	 * @brief evaluate the catalog.
-	 *
-	 *
-	 * @return int - that represent the price of all the item in the catalog
-	 */
-	operator int();
-
-	/**
-	 * @brief Get array for Item pointers inside this branch.
-	 *
-	 * @param num - how much items int returned array
-	 * @return Item** - array of brunch items
-	 */
-	vector<Item*> getCatalog(int& size);
-
-	/**
-	 * @brief Delete Item from catalog by ID.
-	 *
-	 * @param ID - The ID of the item
-	 * @return *Item - ptr to the Item
+	 * @return Item* - pointer to removed item
 	 */
 	Item* deleteItem(const int ID);
 	
+	/**
+	 * @brief Evaluate the branch
+	 * 
+	 * @return int - branch value
+	 */
+	operator int() const;
 
+	/**
+	 * @brief Get the Catalog
+	 * 
+	 * @return vector<Item*> - the catalog
+	 */
+	vector<Item*> getCatalog();
+	
 	/**
      * @brief Set the brunch location.
      *
@@ -137,15 +132,26 @@ public:
 
 	/**
     * @brief Print the catalog by ID
+	* 
     */
-	void print_catalog_by_id();
+	void print_catalog_by_id() const;
 
 	/**
 	* @brief Print the catalog by price
+	*
 	*/
-	void print_catalog_by_price();
+	void print_catalog_by_price() const;
 	
-	// Destractor
+	/**
+	 * @brief Print vector of items
+	 * 
+	 */
+	void print_branch(const vector<Item*>& items) const;
+
+	/**
+	 * @brief Destroy the Branch object
+	 * 
+	 */
 	~Branch();
 };
 
