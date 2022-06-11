@@ -82,7 +82,7 @@ public:
 
 		// No such item of such type in the branch
 		if ( !highest_Price )
-			throw NonExistingItemError();
+			throw NoneExistingItemTypeError();
 
 		return dynamic_cast<T*>(highest_Price);	// Will allways succeed
 	}

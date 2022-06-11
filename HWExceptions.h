@@ -43,7 +43,7 @@ class NonExistingItemError : public exception
 {
     virtual const char* what() const throw()
     {
-        return "Trying to delete an item  with a non existing id";
+        return "Trying to delete an item with a non existing id";
     }
 };
 
