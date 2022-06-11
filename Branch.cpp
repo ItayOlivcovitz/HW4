@@ -74,13 +74,13 @@ void Branch::addItem(Item* item)
  * @param ID - the ID
  * @return Item* - pointer to removed item
  */
-Item* Branch::deleteItem(const int ID)
+Item* Branch::deleteItem(const int id)
 {
 	// Iterate throw the items in the catalog
 	for (auto iter = this->catalog.begin(); iter != this->catalog.end(); ++iter)
 	{
 		// If found the id
-		if ((*iter)->getId() == ID)
+		if ((*iter)->getId() == id)
 		{
 			Item* ptr = *iter;
 			this->catalog.erase (iter);	// Remove the item from the vector

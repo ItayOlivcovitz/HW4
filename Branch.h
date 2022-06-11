@@ -22,7 +22,7 @@ private:
 	// Private variables
 	string location;
 	vector<Item*> catalog;
-	int capacity;	// Not representing how much items in brunch !
+	const int capacity;		// Not representing how much items in brunch !
 
 	/**
 	 * @brief help to sort the vector by price
@@ -100,7 +100,7 @@ public:
 	 * @param ID - the ID
 	 * @return Item* - pointer to removed item
 	 */
-	Item* deleteItem(const int ID);
+	Item* deleteItem(const int id);
 	
 	/**
 	 * @brief Evaluate the branch
