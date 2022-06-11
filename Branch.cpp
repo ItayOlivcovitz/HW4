@@ -28,15 +28,15 @@ void Branch::addItem(Item* item)
 	{
 		if (this->catalog.capacity() >= this->capacity)
 		{
-			HWExceptions e;
-			throw e.FullCatalogError;
+			
+			throw FullCatalogError();
 		}
 		for (auto i : this->catalog)
 		{
 			if ( i == item)
 			{
-				HWExceptions e;
-				throw e.ExistingItemError;
+				
+				throw ExistingItemError();
 			}
 		}
     }
@@ -44,6 +44,44 @@ void Branch::addItem(Item* item)
 	this->catalog.push_back(item);
 }
 
+/**
+	 * @brief Delete item from the catalog.
+	 *
+	 * @param ID - the ID
+	 * @return Item* - ptr to the ID
+	 */
+Item* Branch::deleteItem(const int ID) const
+{
+	Item* ptr = NULL;
+	for (auto itr : this->catalog)
+	{
+		if (itr->getId() == ID)
+		{
+			ptr = itr;
+		}
+	}
+	if (ptr)
+	{
+		throw NonExistingItemError();
+	}
+	return ptr;
+}
+
+/**
+	 * @brief evaluate the catalog.
+	 *
+	 *
+	 * @return int - that represent the price of all the item in the catalog
+	 */
+Branch::operator int()
+  {
+	int value = 0;
+	for (auto itr : this->catalog)
+	{
+		value += itr->getPrice();
+	}
+	return value;
+  }
 /**
  * @brief Get array for Item pointers inside this branch.
  * 
@@ -92,17 +130,18 @@ std::string Branch::getLocation() const
  */
 void Branch:: print_catalog_by_id()
 {
-	map<int, Item*> map_By_Id;
-
-	for (auto i : this->catalog)
-	{
-		int item_ID =i->getId();
-		map_By_Id[item_ID] = i;
-	}
 	
-	for (auto i : map_By_Id)
+	std::cout << "Printing KSF branch in " << this->getLocation() << std::endl;
+	std::cout << "There are " << this->catalog.size() <<" item in the catalog"<< std::endl;
+	std::cout << "Catalog value is: " << int(*this) << std::endl;
+
+	vector<Item*> vector_By_Price;
+	vector_By_Price.assign(this->catalog.begin(), this->catalog.end());
+	std::stable_sort(vector_By_Price.begin(), vector_By_Price.end(), compare_ID);
+
+	for (auto it = vector_By_Price.cbegin(); it != vector_By_Price.cend(); it++)
 	{
-		std::cout << string(*i.second) << std::endl;
+		std::cout << string(**it) << std::endl;
 	}
 }
 
@@ -113,8 +152,17 @@ void Branch:: print_catalog_by_id()
  */
 bool Branch::compare_Price(const Item* i, const Item* j)
 {
-	
 	return (i->getPrice() < j->getPrice());
+}
+
+/**
+ * @brief help to sort the vector
+ *
+ * @return bool - if Item i< Item j return true
+ */
+bool Branch::compare_ID(const Item* i, const Item* j)
+{
+	return (i->getId() < j->getId());
 }
 
 
@@ -137,6 +185,4 @@ void Branch::print_catalog_by_price()
 // Destractor
 Branch::~Branch()
 {
-	
-	
 }
