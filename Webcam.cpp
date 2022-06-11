@@ -1,21 +1,25 @@
+//Student1 Daniel Penkov, penkovdany@gmail.com, 207925504
+//Student2 Itay Olivcovitz, Itay.olivcovitz@gmail.com, 207745639
+
 #include "Webcam.h"
-#include <string>
-#include <iostream>
 
 /**
- * @brief Construct a new Webcam object.
- *
- * @param resultion - Item's price, manufacturer, color, is Wireless,resultion
+ * @brief Construct a new Webcam object
+ * 
+ * @param price - webcam's price
+ * @param manufacturer - webcam's manufacturer
+ * @param color - webcam's color
+ * @param isWireless - true if webcam wireless
+ * @param resultion - webcam's resolution
  */
 Webcam::Webcam(const int price, const string& manufacturer, const string& color, const bool isWireless,const string& resultion)
-	: PeripheralDevice(price, manufacturer, color, isWireless),resultion(resultion)
-{
+	: PeripheralDevice(price, manufacturer, color, isWireless), resultion(resultion)
+{}
 
-}
 /**
- * @brief Get webcam Resultion.
- *
- * @return string
+ * @brief Get the webcam resultion
+ * 
+ * @return string - resolution
  */
 string Webcam::getResultion() const
 {
@@ -23,11 +27,34 @@ string Webcam::getResultion() const
 }
 
 /**
- * @brief set webcam Resultion.
- *
- * @return resultion
+ * @brief Set the resulution of the webcam
+ * 
+ * @param resulution 
  */
-void Webcam::setResulution(string resultion)
+void Webcam::setResulution(const string& resultion)
 {
 	this->resultion = resultion;
+}
+
+/**
+ * @brief Return string representing the webcam.
+ * 
+ * @return string 
+ */
+Webcam::operator string() const
+{
+	string s_res = "Webcam with " + resultion + " resolution";
+
+	return PeripheralDevice::operator string() + ", " + s_res;
+}
+
+/**
+ * @brief Print 'connecting to computer' message.
+ * 
+ * @param computer - to connect to
+ */
+void Webcam::connect(Computer* computer)
+{
+	cout << "Connecting a webcam" << endl;
+	PeripheralDevice::connect (computer);
 }
