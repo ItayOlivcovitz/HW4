@@ -76,34 +76,34 @@ PeripheralDevice::operator string() const
 void PeripheralDevice::connect (Computer* computer)
 {
     // Already connected
-    if (connectedComputer != NULL && connectedComputer == computer)
+    if ( connectedComputer == computer)
         return;
 
     // Connected to other computer
-    if (connectedComputer != NULL && connectedComputer != computer)
+    if ( connectedComputer && connectedComputer != computer)
         throw ConnectError();
 
     // Print 'connecting to' message
     cout << string(*this) << " is Connecting to computer: " << string(*computer) << endl;
 
     // Get computer connected list
-    list<PeripheralDevice*>& connectedDevices = computer->getConnectedDevices();
+    list<PeripheralDevice*>* connectedDevices = computer->getConnectedDevices();
 
     // Check if available ports
-    if (connectedDevices.size() == computer->getPorts())
+    if (connectedDevices->size() == computer->getPorts())
         throw ConnectError();
     
     // Check if device of same type connected
-    for (PeripheralDevice* device : connectedDevices)
+    for (PeripheralDevice* device : *connectedDevices)
     {
-        if (typeid(device) == typeid(this))
+        if (typeid(*device) == typeid(*this))
         {
             throw ConnectError();
         }
     }
     
     // Make the connection
-    connectedDevices.push_back(this);
+    connectedDevices->push_back(this);
     connectedComputer = computer;
 }
 
@@ -118,7 +118,7 @@ void PeripheralDevice::disconnect ()
         return;
     
     // Get computer connected list and remove itself
-    connectedComputer->getConnectedDevices().remove(this);
+    connectedComputer->getConnectedDevices()->remove(this);
     
     // Clear connected computer
     connectedComputer = NULL;
