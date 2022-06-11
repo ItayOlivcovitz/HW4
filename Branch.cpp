@@ -2,7 +2,6 @@
 //Student2 Itay Olivcovitz, Itay.olivcovitz@gmail.com, 207745639
 
 #include "Branch.h"
-#include <iostream>
 
 /**
  * @brief help to sort the vector by price
