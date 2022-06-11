@@ -9,30 +9,28 @@
 
 1. Branch
 -------------------------------
-[ ] Branch (const string& location, const int capacity)
-    [ ] - Default constructor with "~" for location, 0 for capacity
-    [ ] - capacity saved in const variable
-[ ] Copy constructor
-[ ] Destructor
-[ ] void addItem (Item* item) throws()
-    [ ] - Check for exception when added more then capacity items
-    [ ] - Check for uppending at the end of the vector
-[ ] Item* deleteItem (const int ID) throws()
-    [ ] - Check for exception on non existing ID
-[ ] vector<Item*> getCatalog ()
-    [c] - Check when branch is empty
-    [c] - Check when more then 10 items added
-[ ] void print_catalog_by_id() const
-[ ] void print_catalog_by_price() const
-    [ ] - Check for stable sort
-    [ ] - Check when price changed
-[ ] T* retrieveFinest(T* item) throws()
-    [ ] - Check exception when no item of type T in the brunch
-[ ] string getLocation () const
-[ ] void setLocation (const string& location)
-[ ] int getCapacity() const
-[ ] ~Branch()
-    [ ] - Does not free the pointers
+[v] Branch (const string& location, const int capacity)
+    [v] - Default constructor with "~" for location, 0 for capacity
+    [v] - capacity saved in const variable
+[v] Copy constructor
+[v] Destructor
+[v] void addItem (Item* item) throws()
+    [v] - Check for exception when added more then capacity items
+    [v] - Check for uppending at the end of the vector
+[v] Item* deleteItem (const int ID) throws()
+    [v] - Check for exception on non existing ID
+[v] vector<Item*> getCatalog ()
+[v] void print_catalog_by_id() const
+[v] void print_catalog_by_price() const
+    [v] - Check for stable sort
+    [v] - Check when price changed
+[v] T* retrieveFinest(T* item) throws()
+    [v] - Check exception when no item of type T in the brunch
+[v] string getLocation () const
+[v] void setLocation (const string& location)
+[v] int getCapacity() const
+[v] ~Branch()
+    [v] - Does free the pointers
 
 
 2. Item
@@ -50,38 +48,38 @@
 
 3. Computer  :  Item
 -------------------------------
-[ ] Computer (const int price, const string& manufacturer, const string& cpu, const bool isLaptop, const int ports)
-    [ ] - Check ports variable set const
-[ ] void setCpu (const string& cpu)
-[ ] string getSpu () const
-[ ] void setIsLaptop (const bool isLaptop)
-[ ] bool getIsLaptop () const
-[ ] int getPorts () const
-[ ] operator string () const override
-    [ ] - Use item's operator
-[ ] void print_connected () const
-    [ ] - Stable (First added should be first printed)
+[v] Computer (const int price, const string& manufacturer, const string& cpu, const bool isLaptop, const int ports)
+    [v] - Check ports variable set const
+[v] void setCpu (const string& cpu)
+[v] string getSpu () const
+[v] void setIsLaptop (const bool isLaptop)
+[v] bool getIsLaptop () const
+[v] int getPorts () const
+[v] operator string () const override
+    [v] - Use item's operator
+[v] void print_connected () const
+    [v] - Stable (First added should be first printed)
 
 
 4. PeripheralDevice  :  Item
 -------------------------------
-[ ] PeripheralDevice (const int price, const string& manufacturer, const string& color, const bool isWireless)
-[ ] void setColor (const string& color)
-[ ] string getColor () const
-[ ] void setIsWireless (const bool isWireless)
-[ ] bool getIsWireless () const
-[ ] virtual void connect(const Computer& computer) throws() = 0
-    [ ] - Check right print on casted argument e.g. PeripheralDevice* mouse = new Mouse()
-    [ ] - Try minimazing code duplication
-    [ ] - Exception connecting to more then one computers
-    [ ] - Exception when two items of the same type connected
-    [ ] - Exception when more connections then ports
-    [ ] - Do notting when connecting the same computer
-[ ] void disconnect()
-    [ ] - Do notting when not connected
-[ ] virtual operator string () const override = 0
-[ ] ~PeripheralDevice ()
-    [ ] - Disconnecting from computer
+[v] PeripheralDevice (const int price, const string& manufacturer, const string& color, const bool isWireless)
+[v] void setColor (const string& color)
+[v] string getColor () const
+[v] void setIsWireless (const bool isWireless)
+[v] bool getIsWireless () const
+[v] virtual void connect(const Computer& computer) = 0
+    [v] - Check right print on casted argument e.g. PeripheralDevice* mouse = new Mouse()
+    [v] - Try minimazing code duplication
+    [v] - Exception connecting to more then one computers
+    [v] - Exception when two items of the same type connected
+    [v] - Exception when more connections then ports
+    [v] - Do notting when connecting the same computer
+[v] void disconnect()
+    [v] - Do notting when not connected
+[v] virtual operator string () const override = 0
+[v] ~PeripheralDevice ()
+    [v] - Disconnecting from computer
 
 
 5. Keyboard  :  PeripheralDevice  
@@ -106,21 +104,21 @@
 
 7. Webcam  :  PeripheralDevice  
 -------------------------------
-[ ] Webcam (const int price, const string& manufacturer, const string& color, const bool isWireless, const string& resolution)
-[ ] void setResolution (const string resolution)
-[ ] string getResolution () const
-[ ] void connect(const Computer& computer) const override
-[ ] operator string () const override
-    [ ] - Use PeripheralDevice's operator
+[v] Webcam (const int price, const string& manufacturer, const string& color, const bool isWireless, const string& resolution)
+[v] void setResolution (const string resolution)
+[v] string getResolution () const
+[v] void connect(const Computer& computer) const override
+[v] operator string () const override
+    [m] - Use PeripheralDevice's operator
 
 
 8. HWExceptions  :  exception
 -------------------------------
-[ ] ExistingItemError
-[ ] FullCatalogError
-[ ] NonExcistingItemError
-[ ] NoneExcistingItemTypeError
-[ ] ConnectError
+[v] ExistingItemError
+[v] FullCatalogError
+[v] NonExcistingItemError
+[v] NoneExcistingItemTypeError
+[v] ConnectError
 
 
 9. MainOffice (Singleton)  
